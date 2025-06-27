@@ -22,60 +22,27 @@ variable "region" {
 
 variable "s3_bucketname" {
   type        = string
-  description = "Name of the S3 bucket"
-  validation {
-    condition     = length(var.s3_bucketname) > 3
-    error_message = "Bucket name must be >3 chars"
-  }
+  description = "Name of the S3 bucket for website content"
 }
 
-variable "pipeline_artifact_bucket_name" {
-  type        = string
-  description = "Name of the pipeline artifact S3 bucket"
-  validation {
-    condition     = length(var.pipeline_artifact_bucket_name) > 3
-    error_message = "Bucket name must be >3 chars"
-  }
-}
-
-variable "github_oauth_token" {
-  type        = string
-  description = "Github oauth token"
-  sensitive   = true
-}
-
+# GitHub integration variables for CodeBuild
 variable "repo_owner" {
   type        = string
-  description = "Repository owner"
+  description = "GitHub repository owner"
 }
 
 variable "repo_name" {
   type        = string
-  description = "Repository name"
+  description = "GitHub repository name"
 }
 
 variable "repo_branch" {
   type        = string
-  description = "Repository branch"
+  description = "GitHub repository branch"
 }
 
-variable "poll_source_changes" {
-  type        = bool
-  description = "Poll source changes"
-  default     = false
-}
-
-variable "repo_url" {
+variable "github_oauth_token" {
   type        = string
-  description = "Repository url"
-}
-
-variable "code_start_connection_arn" {
-  type        = string
-  description = "Code start connection arn"
-}
-
-variable "repo_id" {
-  type        = string
-  description = "Repository id"
+  description = "GitHub OAuth token"
+  sensitive   = true
 }
