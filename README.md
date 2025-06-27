@@ -25,6 +25,7 @@ This project demonstrates how to deploy a static resume website on AWS using Ter
 
 ## **Repository Structure**
 
+```
 cloud_resume_challenge_terraform/
 ├── main.tf                # Root module configuration
 ├── variables.tf           # Input variables
@@ -35,6 +36,7 @@ cloud_resume_challenge_terraform/
 │   ├── invalidation_lambda/ # Lambda for CloudFront cache invalidation
 │   └── codebuild/         # CodeBuild project for GitHub-to-S3 sync (optional)
 └── README.md
+```
 
 ---
 
