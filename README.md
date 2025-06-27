@@ -83,4 +83,6 @@ To remove all deployed resources:
 $ terraform destroy
 ```
 
+---
+
 **Inspired by the [Cloud Resume Challenge](https://cloudresumechallenge.dev/) and community projects.**
