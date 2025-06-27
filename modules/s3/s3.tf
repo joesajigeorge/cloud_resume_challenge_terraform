@@ -25,6 +25,7 @@ resource "aws_s3_bucket_ownership_controls" "main" {
 }
 
 resource "aws_s3_bucket_policy" "main" {
+  depends_on = [aws_cloudfront_origin_access_identity.s3_origin_identity]
   bucket = aws_s3_bucket.main.id
   policy = jsonencode({
     Version = "2012-10-17"
