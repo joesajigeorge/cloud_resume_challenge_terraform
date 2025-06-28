@@ -1,12 +1,12 @@
-resource "aws_route53_zone" "primary" {
-  name = var.domain_name
+data "aws_route53_zone" "primary" {
+  name         = var.domain_name
+  private_zone = false
 }
 
 resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = var.domain_name
   type    = "A"
-
   alias {
     name                   = var.cloudfront_domain_name
     zone_id                = var.cloudfront_hosted_zone_id
@@ -15,10 +15,9 @@ resource "aws_route53_record" "root" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
-
   alias {
     name                   = var.cloudfront_domain_name
     zone_id                = var.cloudfront_hosted_zone_id
