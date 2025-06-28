@@ -46,3 +46,20 @@ variable "github_oauth_token" {
   description = "GitHub OAuth token"
   sensitive   = true
 }
+
+variable "acm_certificate_arn" {
+  type        = string
+  description = "ARN of the ACM certificate"
+}
+
+variable "domain_name" {
+  type        = string
+  description = "Primary domain name for Route53"
+  default     = "heyjoehere.com"
+}
+
+variable "domain_alias" {
+  type        = list(string)
+  description = "List of domain aliases for CloudFront"
+  default     = []
+}

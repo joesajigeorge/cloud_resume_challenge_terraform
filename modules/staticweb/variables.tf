@@ -15,3 +15,14 @@ variable env {
   type        = string
   description = "The name of the environment"
 }
+
+variable "acm_certificate_arn" {
+  type        = string
+  description = "ARN of the ACM certificate"
+}
+
+variable "aliases" {
+  type        = list(string)
+  description = "List of domain aliases for CloudFront"
+  default     = []
+}

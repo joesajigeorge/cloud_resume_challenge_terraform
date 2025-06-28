@@ -1,5 +1,5 @@
 variable s3_bucket_id {
-  description = "Name of the S3 bucket"
+  description = "ID of the S3 bucket"
 }
 
 variable s3_bucket_arn {

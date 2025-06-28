@@ -3,23 +3,34 @@ provider "aws" {
   region  = var.region
 }
 
-module "s3" {
-  source         = "./modules/s3"
+module "staticweb" {
+  source         = "./modules/staticweb"
   env            = var.env
   region         = var.region
   projectname    = var.projectname
   s3_bucketname  = var.s3_bucketname
+  acm_certificate_arn = var.acm_certificate_arn
+  aliases = var.domain_alias
 }
 
+module "route53" {
+  source = "./modules/route53"
+  depends_on = [module.staticweb] 
+
+  domain_name              = var.domain_name
+  cloudfront_domain_name   = module.staticweb.cloudfront_domainname
+}
+
+
 module "lambda_trigger" {
-  depends_on = [module.s3]
+  depends_on = [module.staticweb]
   source     = "./modules/invalidation_lambda"
   env        = var.env
   region     = var.region
   projectname = var.projectname
-  s3_bucket_id = module.s3.s3_bucket_id
-  s3_bucket_arn = module.s3.s3_bucket_arn
-  aws_cloudfront_distribution_id = module.s3.aws_cloudfront_distribution_id
+  s3_bucket_id = module.staticweb.s3_bucket_id
+  s3_bucket_arn = module.staticweb.s3_bucket_arn
+  aws_cloudfront_distribution_id = module.staticweb.aws_cloudfront_distribution_id
 }
 
 module "codebuild" {
