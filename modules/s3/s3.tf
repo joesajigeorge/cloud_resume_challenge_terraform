@@ -2,11 +2,6 @@ resource "aws_s3_bucket" "main" {
   bucket = var.s3_bucketname
 }
 
-resource "aws_s3_bucket_acl" "main_acl" {
-  bucket = aws_s3_bucket.main.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_website_configuration" "main_website" {
   bucket = aws_s3_bucket.main.id
   index_document {

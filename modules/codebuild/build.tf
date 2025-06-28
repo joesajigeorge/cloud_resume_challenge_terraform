@@ -48,6 +48,12 @@ resource "aws_iam_role_policy" "codebuild_policy" {
   })
 }
 
+resource "aws_codebuild_source_credential" "github_token" {
+  auth_type   = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token       = var.github_oauth_token
+}
+
 resource "aws_codebuild_project" "github_to_s3" {
   name          = "${var.projectname}-${var.env}-github-to-s3"
   description   = "Sync GitHub repo to S3"
@@ -58,10 +64,6 @@ resource "aws_codebuild_project" "github_to_s3" {
     type      = "GITHUB"
     location  = "https://github.com/${var.repo_owner}/${var.repo_name}.git"
     buildspec = "buildspec.yml"
-    auth {
-      type     = "OAUTH"
-      resource = var.github_oauth_token
-    }
   }
 
   artifacts {

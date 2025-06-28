@@ -1,5 +1,5 @@
 output "s3_static_website_url" {
-  value       = aws_s3_bucket.main.website_endpoint
+  value       = aws_s3_bucket_website_configuration.main_website.website_endpoint
   description = "S3 bucket static website URL"
 }
 
